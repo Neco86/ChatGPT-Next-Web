@@ -105,6 +105,8 @@ const loadAsyncGoogleFont = () => {
   document.head.appendChild(linkEl);
 };
 
+const isIframe = globalThis.parent !== globalThis.self;
+
 function Screen() {
   const config = useAppConfig();
   const location = useLocation();
@@ -124,7 +126,8 @@ function Screen() {
           config.tightBorder && !isMobileScreen
             ? styles["tight-container"]
             : styles.container
-        }`
+        }` +
+        `${isIframe ? styles.iframe : ''}`
       }
     >
       {isAuth ? (
